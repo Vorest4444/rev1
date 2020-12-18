@@ -10,6 +10,5 @@ aws ec2 run-instances --image-id ami-0d1b856bc73836806 --count 1 --instance-type
 
 
 
-
-3.129.72.23
-3.133.119.197
+18.221.124.86
+3.17.26.81
