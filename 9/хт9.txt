@@ -4,3 +4,5 @@ aws ecs list-task-definitions
 aws ecs create-service --cluster far-cluster --service-name fargate-service --task-definition sample-fargate:1 --desired-count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-9fc88dd3],securityGroups=[sg-0c60668ca24e6c321],assignPublicIp=ENABLED}"
 aws ecs list-services --cluster far-cluster
 aws ecs describe-services --cluster far-cluster --services fargate-service
+
+ 3.136.161.47
