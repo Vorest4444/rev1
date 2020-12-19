@@ -1,9 +1,0 @@
-aws configure
-aws s3 mb s3://s3-Valentyn
-make_bucket: vorest-bucket-1
-aws s3 ls
-2020-11-30 21:28:25 s3-Valentyn
-cd OneDrive\Desktop\s3
-aws s3 sync . s3://vorest-bucket-1
-aws s3api put-bucket-website --bucket vorest-bucket-1 --website-configuration file://website.json
-aws s3api put-bucket-policy --bucket vorest-bucket-1 --policy file://policy.json
