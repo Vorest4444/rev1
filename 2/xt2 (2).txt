@@ -1,0 +1,26 @@
+Створюєм мережу
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+Створюєм 2 підмережі
+aws ec2 create-subnet --vpc-id vpc-04c5cf1a545b52359 --cidr-block 10.0.1.0/24
+aws ec2 create-subnet --vpc-id vpc-04c5cf1a545b52359 --cidr-block 10.0.0.0/24
+Гетавей
+aws ec2 create-internet-gateway
+aws ec2 attach-internet-gateway --vpc-id vpc-04c5cf1a545b52359 --internet-gateway-id igw-077cf33bf616428f4
+Таблиці маршрутизаціїї
+aws ec2 create-route-table --vpc-id vpc-04c5cf1a545b52359
+aws ec2 create-route --route-table-id rtb-03604c59f6e8b4005 --destination-cidr-block 0.0.0.0/0 --gateway-id igw-077cf33bf616428f4
+aws ec2 describe-route-tables --route-table-id rtb-03604c59f6e8b4005
+aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-04c5cf1a545b52359" --query 'Subnets[*].{ID:SubnetId,CIDR:CidrBlock}'
+
+aws ec2 associate-route-table  --subnet-id subnet-05c2c6da9f2e45f18 --route-table-id rtb-03604c59f6e8b4005
+aws ec2 modify-subnet-attribute --subnet-id subnet-05c2c6da9f2e45f18 --map-public-ip-on-launch
+
+aws ec2 create-key-pair --key-name ValikKeyPair --query 'KeyMaterial' --output text > ValikKeyPair.pem
+
+aws ec2 create-security-group --group-name Valentynlab2 --description "Security group for SSH access" --vpc-id vpc-04c5cf1a545b52359
+aws ec2 authorize-security-group-ingress --group-id sg-0efbd68319afce557 --protocol tcp --port 22 --cidr 0.0.0.0/0
+
+aws ec2 run-instances --image-id ami-0d1b856bc73836806 --count 1 --instance-type t2.micro --key-name ValikKeyPair --security-group-ids sg-0efbd68319afce557 --subnet-id subnet-05c2c6da9f2e45f18
+aws ec2 describe-instances --instance-id i-0342cae7b53d09e09
+ssh -i "ValikKeyPair.pem" ec2-user@52.87.168.235
+
