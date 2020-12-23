@@ -19,4 +19,4 @@ aws elbv2 register-targets --target-group-arn arn:aws:elasticloadbalancing:us-ea
 aws elbv2 create-listener --load-balancer-arn arn:aws:elasticloadbalancing:us-east-2:769897965361:loadbalancer/app/Lab4/18e706df7b53446c --protocol HTTP --port 80 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-east-2:769897965361:targetgroup/Lab4/ed470c77f2f9b40a
 
 
-Lab4-533447805.us-east-2.elb.amazonaws.com
+Lab4-820545424.us-east-2.elb.amazonaws.com
